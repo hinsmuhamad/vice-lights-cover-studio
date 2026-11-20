@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Vice Lights Cover Studio: turn any photo into sunset poster cover art, export PNG in three post sizes.">
+<title>Vice Lights Cover Studio</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <strong>VICE LIGHTS</strong>
+    <span>Cover Studio</span>
+  </div>
+  <p class="topnote">Turn any photo into sunset poster cover art. No upload, everything stays on your machine.</p>
+</header>
+<main class="app">
+  <section class="panel controls" aria-label="Cover controls">
+    <h1>Make your cover</h1>
+    <p class="hint">Pick a photo, pick a layout and a grade, edit the words, then export a PNG.</p>
+
+    <div class="group two-col">
+      <h2>1. Photos</h2>
+      <label class="filelabel">Upload a photo
+        <input id="uploadOne" type="file" accept="image/*">
+      </label>
+      <label class="filelabel">Upload several photos
+        <input id="uploadMany" type="file" accept="image/*" multiple>
+      </label>
+      <div class="row">
+        <button id="fillAll" type="button">One photo fills all panels</button>
+        <button id="fillEach" type="button">Several photos, one per panel</button>
+      </div>
+      <p class="hint">Sample photos, free to use:</p>
+      <div class="samples" id="samples"></div>
+    </div>
+
+    <div class="group">
+      <h2>2. Layout and grade</h2>
+      <label class="inline">Layout
+        <select id="layout"></select>
+      </label>
+      <div class="chips" id="layoutChips"></div>
+      <label class="inline">Grade
+        <select id="grade"></select>
+      </label>
+      <div class="chips" id="gradeChips"></div>
+    </div>
+
+    <div class="group three-col">
+      <h2>3. Words</h2>
+      <label>Title <input id="title" type="text" maxlength="28" value="VICE LIGHTS"></label>
+      <label>Script subtitle <input id="subtitle" type="text" maxlength="40" value="Paid in Sunsets"></label>
+      <label>Press quote <input id="quote" type="text" maxlength="70" value="THE HOTTEST RIDE OF THE YEAR"></label>
+      <label>Quote source <input id="quoteSource" type="text" maxlength="40" value="Golden Mile Gazette"></label>
+      <label>Tagline, comma separated
+        <input id="tagline" type="text" maxlength="90" value="Seven lives, one coast, no way back">
+      </label>
+      <label>VOL. badge <input id="vol" type="text" maxlength="12" value="VOL. 01"></label>
+      <label>Seal text <input id="seal" type="text" maxlength="24" value="BEST CAST"></label>
+      <label>Your name (billing) <input id="userName" type="text" maxlength="40" value="Starring You"></label>
+      <label>Billing credits
+        <textarea id="billing" rows="1" maxlength="220">A VICE LIGHTS PICTURE  SHOT ON YOUR OWN PHONE  STARRING YOU AND YOUR CREW</textarea>
+      </label>
+    </div>
+
+    <div class="group three-col">
+      <h2>4. Cast tags</h2>
+      <label>Panel to edit
+        <select id="panelPick"></select>
+      </label>
+      <label>Role <input id="role" type="text" maxlength="24" value="THE DRIVER"></label>
+      <label>Place <input id="place" type="text" maxlength="28" value="Ocean Drive"></label>
+      <label>Time <input id="time" type="text" maxlength="16" value="6:42 PM"></label>
+      <label>Note <input id="note" type="text" maxlength="36" value="Looking for trouble"></label>
+      <label>Zoom <input id="zoom" type="range" min="1" max="2.5" step="0.05" value="1.15"></label>
+      <div class="row">
+        <button id="faceCrop" type="button">Centre on face</button>
+        <button id="resetCrop" type="button">Reset crop</button>
+      </div>
+      <p class="hint">Drag on the preview to move the selected panel photo. Scroll on it to zoom.</p>
+    </div>
+
+    <div class="group two-col">
+      <h2>5. Callouts and print feel</h2>
+      <label class="check wide"><input id="showCallouts" type="checkbox" checked> Show callouts</label>
+      <div class="row2">
+        <label>Callout place <input id="calloutPlace" type="text" maxlength="30" value="CORAL CAUSEWAY"></label>
+        <label>Callout time <input id="calloutTime" type="text" maxlength="12" value="7:15 PM"></label>
+      </div>
+      <div class="row2">
+        <label>HEAT stars (1 to 5) <input id="heat" type="number" min="1" max="5" step="1" value="4"></label>
+        <label>WANTED tag <input id="wanted" type="text" maxlength="18" value="WANTED"></label>
+      </div>
+      <label class="check"><input id="grain" type="checkbox" checked> Grain</label>
+      <label class="check"><input id="vignette" type="checkbox" checked> Vignette</label>
+      <label class="check"><input id="halftone" type="checkbox"> Halftone dots</label>
+    </div>
+
+    <div class="group actions">
+      <div class="row">
+        <button id="shuffle" type="button">Shuffle</button>
+        <button id="undo" type="button">Undo</button>
+        <button id="redo" type="button">Redo</button>
+      </div>
+      <div class="row">
+        <button id="exportAll" type="button" class="primary">Export all 3 sizes</button>
+      </div>
+      <div class="row">
+        <button id="exportSquare" type="button">1080 x 1080</button>
+        <button id="exportPortrait" type="button">1080 x 1350</button>
+        <button id="exportWide" type="button">1920 x 1080</button>
+      </div>
+      <p id="status" role="status"></p>
+    </div>
+  </section>
+
+  <section class="preview" aria-label="Live cover preview">
+    <canvas id="cover" width="1280" height="720" aria-label="Live cover preview"></canvas>
+    <p class="hint">Live preview. The title band is kept clear of the hero face by the layout.</p>
+    <p class="small">Original art made on your machine. No Rockstar logo, artwork, character or font is used here.</p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
